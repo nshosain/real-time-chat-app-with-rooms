@@ -1,4 +1,4 @@
-// require("dotenv").config(); //! uncomment this while working in local dev
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const http = require("http");
