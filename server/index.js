@@ -1,14 +1,19 @@
-//require("dotenv").config();
-const express = require("express");
-const app = express();
-const http = require("http");
-const cors = require("cors");
-const { Server } = require("socket.io");
-const harperSaveMessage = require("./services/harper-save-message");
-const harperGetMessages = require("./services/harper-get-messages");
-const leaveRoom = require("./utils/leave-room");
+import * as dotenv from "dotenv";
+dotenv.config();
 
-// const PORT = parseInt(process.env.PORT);
+import express from "express";
+
+import http from "http";
+import cors from "cors";
+import { Server } from "socket.io";
+
+import leaveRoom from "./utils/leave-room.js";
+import harperSaveMessage from "./services/harper-save-message.js";
+import harperGetMessages from "./services/harper-get-messages.js";
+
+const app = express();
+
+const PORT = parseInt(process.env.PORT);
 
 app.use(cors()); // Add cors middleware
 
@@ -101,10 +106,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// server.listen(PORT, () => {
-//   console.log(`server is running on port ${PORT}`);
-// });
-
-server.listen(4000, () => {
-  console.log(`server is running on port`);
+server.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
 });
