@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config(); //! uncomment this while working in local dev
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -101,6 +101,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  console.log("server is running on port 4000");
+server.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
 });
