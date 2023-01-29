@@ -8,8 +8,7 @@ const harperSaveMessage = require("./services/harper-save-message");
 const harperGetMessages = require("./services/harper-get-messages");
 const leaveRoom = require("./utils/leave-room");
 
-const PORT = process.env.PORT;
-const ORIGIN = process.env.ORIGIN;
+const PORT = parseInt(process.env.PORT);
 
 app.use(cors()); // Add cors middleware
 
@@ -18,7 +17,7 @@ const server = http.createServer(app);
 // Create an io server and allow for CORS from http://localhost:3000 with GET and POST methods
 const io = new Server(server, {
   cors: {
-    origin: ORIGIN,
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -102,4 +101,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => `Server is running on port ${PORT}`);
+server.listen(4000, () => {
+  console.log("server is running on port 4000");
+});
