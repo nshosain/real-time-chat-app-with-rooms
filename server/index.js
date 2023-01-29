@@ -1,4 +1,4 @@
-require("dotenv").config();
+//require("dotenv").config();
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -8,7 +8,7 @@ const harperSaveMessage = require("./services/harper-save-message");
 const harperGetMessages = require("./services/harper-get-messages");
 const leaveRoom = require("./utils/leave-room");
 
-const PORT = parseInt(process.env.PORT);
+// const PORT = parseInt(process.env.PORT);
 
 app.use(cors()); // Add cors middleware
 
@@ -101,6 +101,10 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+// server.listen(PORT, () => {
+//   console.log(`server is running on port ${PORT}`);
+// });
+
+server.listen(4000, () => {
+  console.log(`server is running on port`);
 });
