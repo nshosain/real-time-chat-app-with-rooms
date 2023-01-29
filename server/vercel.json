@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "/index.js",
-      "use": "@varcel/node"
+      "use": "@now/node"
     }
   ],
   "routes": [
