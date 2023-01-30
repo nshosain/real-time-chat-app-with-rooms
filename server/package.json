@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "A backend for a real time chat app with rooms",
   "main": "index.ts",
-  "type": "module",
   "scripts": {
     "tsc": "tsc",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
