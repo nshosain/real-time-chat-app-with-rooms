@@ -1,7 +1,7 @@
 {
-  "name": "real-time-chat-app-with-rooms-server",
+  "name": "Real-Time-Chat-App-With-Rooms",
   "version": "1.0.0",
-  "description": "A backend for a real time chat app with rooms",
+  "description": "Backend for a real time chat app with rooms",
   "main": "index.ts",
   "scripts": {
     "tsc": "tsc",
@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nshosain/Realtime-Chat-App-With-Rooms"
+    "url": "https://github.com/nshosain/Real-Time-Chat-App-With-Rooms"
   },
   "keywords": [],
-  "author": "nshosain@gmail.com",
+  "author": "Md Nazmul Hosain <nshosain@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.2.3",

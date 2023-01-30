@@ -10,7 +10,7 @@ import { UserInterface } from "./models/user-model";
 
 import createDBConnection from "./db/db-connection";
 
-// import leaveRoom from "./utils/leave-room";
+import leaveRoom from "./utils/leave-room";
 // import harperSaveMessage from "./services/harper-save-message";
 // import harperGetMessages from "./services/harper-get-messages";
 
@@ -35,8 +35,8 @@ const io = new Server(server, {
 
 const CHAT_BOT = "ChatBot";
 
-let chatRoom: string; // E.g. javascript, node,...
-let allUsers: [UserInterface]; // All users in current chat room
+let chatRoom: string = ""; // E.g. javascript, node,...
+let allUsers: any = []; // All users in current chat room
 
 // Listen for when the client connects via socket.io-client
 io.on("connection", (socket) => {
@@ -67,7 +67,7 @@ io.on("connection", (socket) => {
 
     chatRoom = room;
     allUsers.push({ id: socket.id, username, room });
-    let chatRoomUsers = allUsers.filter((user) => user.room === room);
+    let chatRoomUsers = allUsers.filter((user: UserInterface) => user.room === room);
     socket.to(room).emit("chatroom_users", chatRoomUsers);
     socket.emit("chatroom_users", chatRoomUsers);
 
@@ -87,32 +87,32 @@ io.on("connection", (socket) => {
   //     .catch((err) => console.log(err));
   // });
 
-  // socket.on("leave_room", (data) => {
-  //   const { username, room } = data;
-  //   socket.leave(room);
-  //   const __createdtime__ = Date.now();
-  //   // Remove user from memory
-  //   allUsers = leaveRoom(socket.id, allUsers);
-  //   socket.to(room).emit("chatroom_users", allUsers);
-  //   socket.to(room).emit("receive_message", {
-  //     username: CHAT_BOT,
-  //     message: `${username} has left the chat`,
-  //     __createdtime__,
-  //   });
-  //   console.log(`${username} has left the chat`);
-  // });
+  socket.on("leave_room", (data) => {
+    const { username, room } = data;
+    socket.leave(room);
+    const createdAt = Date.now();
+    // Remove user from memory
+    allUsers = leaveRoom(socket.id, allUsers);
+    socket.to(room).emit("chatroom_users", allUsers);
+    socket.to(room).emit("receive_message", {
+      username: CHAT_BOT,
+      message: `${username} has left the chat`,
+      createdAt,
+    });
+  });
 
-  // socket.on("disconnect", () => {
-  //   console.log("User disconnected from the chat");
-  //   const user = allUsers.find((user) => user.id == socket.id);
-  //   if (user?.username) {
-  //     allUsers = leaveRoom(socket.id, allUsers);
-  //     socket.to(chatRoom).emit("chatroom_users", allUsers);
-  //     socket.to(chatRoom).emit("receive_message", {
-  //       message: `${user.username} has disconnected from the chat.`,
-  //     });
-  //   }
-  // });
+  socket.on("disconnect", () => {
+    const user = allUsers.find((user: UserInterface) => user.id == socket.id);
+    if (user?.username) {
+      allUsers = leaveRoom(socket.id, allUsers);
+      socket.to(chatRoom).emit("chatroom_users", allUsers);
+      socket.to(chatRoom).emit("receive_message", {
+        message: `${user.username} has disconnected from the chat.`,
+        username: CHAT_BOT,
+        createdAt: Date.now()
+      });
+    }
+  });
 });
 
 server.listen(PORT, async () => {
