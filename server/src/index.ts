@@ -42,8 +42,6 @@ let allUsers: any = []; // All users in current chat room
 
 // Listen for when the client connects via socket.io-client
 io.on("connection", (socket) => {
-  console.log(`User connected ${socket.id}`);
-
   // Add a user to a room
   socket.on("join_room", async (data) => {
     const { username, room } = data; // Data sent from client when join_room event emitted
@@ -73,7 +71,7 @@ io.on("connection", (socket) => {
     socket.to(room).emit("chatroom_users", chatRoomUsers);
     socket.emit("chatroom_users", chatRoomUsers);
 
-    const last100Messages: any = await GetLastHundredMessage(room); console.log(last100Messages);
+    const last100Messages: any = await GetLastHundredMessage(room);
     if (last100Messages) socket.emit("last_100_messages", last100Messages);
   });
 
