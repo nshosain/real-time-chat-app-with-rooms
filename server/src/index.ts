@@ -7,12 +7,14 @@ import { Server } from "socket.io";
 import logger, { throwBadRequestError } from "./utils/logger";
 
 import { UserInterface } from "./models/user-model";
+import { MessageInterface } from "./models/message-model";
 
 import createDBConnection from "./db/db-connection";
 
 import leaveRoom from "./utils/leave-room";
-// import harperSaveMessage from "./services/harper-save-message";
-// import harperGetMessages from "./services/harper-get-messages";
+
+import mongooseSaveMessage from "./services/mongoose-messages-service";
+
 
 const PORT = config.get<number>('PORT');
 const ORIGIN = config.get<string>('ORIGIN');
@@ -79,13 +81,12 @@ io.on("connection", (socket) => {
     //   .catch((err) => console.log(err));
   });
 
-  // socket.on("send_message", (data) => {
-  //   const { message, username, room, __createdtime__ } = data;
-  //   io.in(room).emit("receive_message", data); // Send to all users in room, including sender
-  //   harperSaveMessage(message, username, room, __createdtime__) // Save message in db
-  //     .then((response) => console.log(response))
-  //     .catch((err) => console.log(err));
-  // });
+  socket.on("send_message", async (data: MessageInterface) => {
+    const { message, username, room } = data;
+    await mongooseSaveMessage(data); // save message to database
+    io.in(room).emit("receive_message", data); // Send to all users in room, including sender
+
+  });
 
   socket.on("leave_room", (data) => {
     const { username, room } = data;
