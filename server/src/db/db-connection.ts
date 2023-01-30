@@ -12,6 +12,8 @@ export default async function createDBConnection() {
 
     const mongoDbConnectionURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}/${MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
+    mongoose.set("strictQuery", false);
+    
     try {
         await mongoose.connect(mongoDbConnectionURI, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
         logger.info("Database connection successful");

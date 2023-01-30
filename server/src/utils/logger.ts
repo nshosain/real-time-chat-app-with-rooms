@@ -13,3 +13,9 @@ export default logger({
     },
     timestamp: () => `,"time":"${moment().format()}"`
 });
+
+export function throwBadRequestError(errorMessage: string) {
+    const customError: any = new Error(errorMessage);
+    customError.statusCode = 400;
+    throw customError;
+}
