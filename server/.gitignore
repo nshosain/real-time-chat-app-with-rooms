@@ -3,3 +3,6 @@
 
 # configs
 /config
+
+# builds
+/dist
