@@ -13,7 +13,7 @@ import createDBConnection from "./db/db-connection";
 
 import leaveRoom from "./utils/leave-room";
 
-import mongooseSaveMessage from "./services/mongoose-messages-service";
+import { SaveMessage, GetLastHundredMessage } from "./services/mongoose-messages-service";
 
 
 const PORT = config.get<number>('PORT');
@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
   console.log(`User connected ${socket.id}`);
 
   // Add a user to a room
-  socket.on("join_room", (data) => {
+  socket.on("join_room", async (data) => {
     const { username, room } = data; // Data sent from client when join_room event emitted
 
     if (!username || !room) throwBadRequestError('Username and Room must be selected');
@@ -73,17 +73,13 @@ io.on("connection", (socket) => {
     socket.to(room).emit("chatroom_users", chatRoomUsers);
     socket.emit("chatroom_users", chatRoomUsers);
 
-    // harperGetMessages(room)
-    //   .then((last100Messages) => {
-    //     // console.log('latest messages', last100Messages);
-    //     socket.emit("last_100_messages", last100Messages);
-    //   })
-    //   .catch((err) => console.log(err));
+    const last100Messages: any = await GetLastHundredMessage(room);
+    if (last100Messages) socket.emit("last_100_messages", last100Messages);
   });
 
   socket.on("send_message", async (data: MessageInterface) => {
     const { message, username, room } = data;
-    await mongooseSaveMessage(data); // save message to database
+    await SaveMessage(data); // save message to database
     io.in(room).emit("receive_message", data); // Send to all users in room, including sender
 
   });
