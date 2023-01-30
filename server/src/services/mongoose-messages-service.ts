@@ -13,8 +13,7 @@ export async function SaveMessage(messageData: MessageInterface) {
 
 export async function GetLastHundredMessage(room: string) {
   try {
-    const query: FilterQuery<MessageInterface> = { room: room };
-    return await Message.find(query).sort({ createdAt: -1 }).limit(100);
+    return await Message.find({ room: room }, { message: 1, username: 1, createdAt: 1 }).limit(100);
   }
   catch (err: any) {
     throw err;

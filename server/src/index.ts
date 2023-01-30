@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
     socket.to(room).emit("chatroom_users", chatRoomUsers);
     socket.emit("chatroom_users", chatRoomUsers);
 
-    const last100Messages: any = await GetLastHundredMessage(room);
+    const last100Messages: any = await GetLastHundredMessage(room); console.log(last100Messages);
     if (last100Messages) socket.emit("last_100_messages", last100Messages);
   });
 
