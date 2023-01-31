@@ -1,5 +1,6 @@
 {
-  "name": "client",
+  "name": "real-time-chat-app-with-rooms-client",
+  "description": "Frontend for a real time chat app with rooms",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
