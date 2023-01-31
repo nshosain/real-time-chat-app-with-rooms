@@ -1,5 +1,5 @@
-import { UserInterface } from "../models/user-model";
+import { IUser } from "../models/user-model";
 
-export default function leaveRoom(userID: string, chatRoomUsers: [UserInterface]) {
-  return chatRoomUsers.filter((user: UserInterface) => user.id != userID);
+export default function leaveRoom(userID: string, chatRoomUsers: [IUser]) {
+  return chatRoomUsers.filter((user: IUser) => user.id != userID);
 }

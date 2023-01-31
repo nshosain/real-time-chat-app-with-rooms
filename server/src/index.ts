@@ -8,14 +8,14 @@ import config from "./config/config";
 import logger, { throwBadRequestError } from "./utils/logger";
 import router from "./routes";
 
-import { UserInterface } from "./models/user-model";
-import { MessageInterface } from "./models/message-model";
+import { IUser } from "./models/user-model";
+import { IMessage } from "./models/message-model";
 
 import createDBConnection from "./db/db-connection";
 
 import leaveRoom from "./utils/leave-room";
 
-import { SaveMessage, GetLastHundredMessage } from "./services/mongoose-messages-service";
+import { SaveMessage, GetLastHundredMessages } from "./services/mongoose-messages-service";
 
 
 const PORT = config.PORT;
@@ -65,15 +65,15 @@ io.on("connection", (socket) => {
 
     chatRoom = room;
     allUsers.push({ id: socket.id, username, room });
-    let chatRoomUsers = allUsers.filter((user: UserInterface) => user.room === room);
+    let chatRoomUsers = allUsers.filter((user: IUser) => user.room === room);
     socket.to(room).emit("chatroom_users", chatRoomUsers);
     socket.emit("chatroom_users", chatRoomUsers);
 
-    const last100Messages: any = await GetLastHundredMessage(room);
+    const last100Messages: any = await GetLastHundredMessages(room);
     if (last100Messages) socket.emit("last_100_messages", last100Messages);
   });
 
-  socket.on("send_message", async (data: MessageInterface) => {
+  socket.on("send_message", async (data: IMessage) => {
     const { message, username, room } = data;
     await SaveMessage(data); // save message to database
     io.in(room).emit("receive_message", data); // Send to all users in room, including sender
@@ -95,7 +95,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    const user = allUsers.find((user: UserInterface) => user.id == socket.id);
+    const user = allUsers.find((user: IUser) => user.id == socket.id);
     if (user?.username) {
       allUsers = leaveRoom(socket.id, allUsers);
       socket.to(chatRoom).emit("chatroom_users", allUsers);

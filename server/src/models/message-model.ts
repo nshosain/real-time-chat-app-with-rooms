@@ -1,12 +1,14 @@
-import { model, Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-export interface MessageInterface extends Document {
+export interface IMessage {
     message: string,
     username: string,
     room: string
 }
 
-export const MessageSchema = new Schema(
+export interface IMessageSchema extends IMessage, Document { }
+
+export const MessageSchema: Schema = new Schema(
     {
         message: {
             type: String,
@@ -26,6 +28,5 @@ export const MessageSchema = new Schema(
     }
 );
 
-const Message = model<MessageInterface>("Message", MessageSchema);
-
-export default Message;
+const MessageModel = mongoose.model<IMessageSchema>("message", MessageSchema);
+export default MessageModel;

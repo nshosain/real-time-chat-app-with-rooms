@@ -1,17 +1,17 @@
-import Message, { MessageInterface } from "../models/message-model";
+import MessageModel, { IMessage } from "../models/message-model";
 
-export async function SaveMessage(messageData: MessageInterface) {
+export async function SaveMessage(messageData: IMessage) {
   try {
-    await Message.create([messageData]);
+    await MessageModel.create([messageData]);
   }
   catch (err: any) {
     throw err;
   }
 }
 
-export async function GetLastHundredMessage(room: string) {
+export async function GetLastHundredMessages(room: string) {
   try {
-    return await Message.find({ room: room }, { message: 1, username: 1, createdAt: 1 }).limit(100);
+    return await MessageModel.find({ room: room }, { message: 1, username: 1, createdAt: 1 }).limit(100);
   }
   catch (err: any) {
     throw err;
