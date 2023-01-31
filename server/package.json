@@ -1,12 +1,14 @@
 {
-  "name": "Real-Time-Chat-App-With-Rooms",
+  "name": "real-time-chat-app-with-rooms-server",
   "version": "1.0.0",
   "description": "Backend for a real time chat app with rooms",
   "main": "index.ts",
   "scripts": {
+    "start": "vercel dev",
+    "deploy" : "vercel deploy --prod",
     "tsc": "tsc",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
+    "prod": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
