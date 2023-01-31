@@ -2,6 +2,7 @@
   "name": "real-time-chat-app-with-rooms-client",
   "description": "Frontend for a real time chat app with rooms",
   "version": "0.1.0",
+  "author": "Md Nazmul Hosain <nshosain@gmail.com>",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

@@ -40,6 +40,16 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
         >
           Join Room
         </button>
+        <h5>
+          {`developed by `}
+          <a
+            href="https://www.linkedin.com/in/nshosain/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {"@nshosain"}
+          </a>
+        </h5>
       </div>
     </div>
   );
