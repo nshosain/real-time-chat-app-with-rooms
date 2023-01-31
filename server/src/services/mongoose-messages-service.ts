@@ -1,6 +1,4 @@
 import Message, { MessageInterface } from "../models/message-model";
-import { FilterQuery } from "mongoose";
-
 
 export async function SaveMessage(messageData: MessageInterface) {
   try {

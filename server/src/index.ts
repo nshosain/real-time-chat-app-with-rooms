@@ -1,8 +1,9 @@
 import express, { Express } from "express";
-import config from "config";
 import http from "http";
 import cors from "cors";
 import { Server } from "socket.io";
+
+import config from "./config/config";
 
 import logger, { throwBadRequestError } from "./utils/logger";
 import router from "./routes";
@@ -17,8 +18,7 @@ import leaveRoom from "./utils/leave-room";
 import { SaveMessage, GetLastHundredMessage } from "./services/mongoose-messages-service";
 
 
-const PORT = config.get<number>('PORT');
-const ORIGIN = config.get<string>('ORIGIN');
+const PORT = config.PORT;
 
 const app: Express = express();
 
@@ -31,12 +31,7 @@ createDBConnection();
 const server = http.createServer(app);
 
 // Create an io server and allow for CORS from specified origin with GET and POST methods
-const io = new Server(server, {
-  cors: {
-    origin: ORIGIN,
-    methods: ["GET", "POST"],
-  },
-});
+const io = new Server(server, { cors: config.CORS_OPTIONS });
 
 const CHAT_BOT = "ChatBot";
 

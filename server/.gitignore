@@ -3,6 +3,7 @@
 
 # configs
 /config
+.env
 
 # builds
 /dist
