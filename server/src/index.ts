@@ -5,6 +5,7 @@ import cors from "cors";
 import { Server } from "socket.io";
 
 import logger, { throwBadRequestError } from "./utils/logger";
+import router from "./routes";
 
 import { UserInterface } from "./models/user-model";
 import { MessageInterface } from "./models/message-model";
@@ -22,6 +23,8 @@ const ORIGIN = config.get<string>('ORIGIN');
 const app: Express = express();
 
 app.use(cors()); // Add cors middleware
+
+app.use(router); // Add routes
 
 createDBConnection();
 
