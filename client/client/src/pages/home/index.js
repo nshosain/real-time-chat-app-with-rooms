@@ -1,6 +1,9 @@
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { AiOutlineGithub } from "react-icons/ai";
+
 const Home = ({ username, setUsername, room, setRoom, socket }) => {
   const navigate = useNavigate();
 
@@ -40,16 +43,23 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
         >
           Join Room
         </button>
-        <h5>
-          {`developed by `}
+
+        <div>
+          <a
+            href="https://github.com/nshosain"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <AiOutlineGithub style={{ color: "black", fontSize: "30px" }} />
+          </a>{" "}
           <a
             href="https://www.linkedin.com/in/nshosain/"
             target="_blank"
             rel="noreferrer"
           >
-            {"@nshosain"}
+            <FaLinkedin style={{ color: "black", fontSize: "30px" }} />
           </a>
-        </h5>
+        </div>
       </div>
     </div>
   );
