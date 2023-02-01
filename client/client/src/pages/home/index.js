@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { AiOutlineGithub } from "react-icons/ai";
 
 const Home = ({ username, setUsername, room, setRoom, socket }) => {
