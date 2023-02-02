@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/-socket.io-313131?style=flat-square&logo=socket.io&logoColor=#F7F7F7" />
  </p>
  
- <h3 align="center">🟢 Live on <a href="https://real-time-chat-app-with-rooms.vercel.app/">Vercel</a></h3>
+ <h3 align="center">🟢 Live on <a href="https://real-time-chat-app-with-rooms.vercel.app/" target="_blank" rel="noreferrer">Vercel</a></h3>
  
 ----
 <h3 align="center">Features</h3>
