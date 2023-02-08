@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/-socket.io-313131?style=flat-square&logo=socket.io&logoColor=#F7F7F7" />
  </p>
  
- <h3 align="center">🟢 Live on <a href="https://real-time-chat-app-with-rooms.vercel.app/" target="_blank" rel="noreferrer">Vercel</a></h3>
+ <h5 align="center">🟢 Live on <a href="https://real-time-chat-app-with-rooms.vercel.app/" target="_blank" rel="noreferrer">Vercel</a></h5>
  
 ----
 <h3 align="center">Features</h3>
@@ -21,7 +21,7 @@
 </div>
 
 
-## A real-time chat app with rooms named "DevRooms". Users can instantly join any room and chat with other members of the room. The room shows last 100 messages and who else is online. A chat bot is always there to help out with notifications like warm greetings and left alters.
+<p> A real-time chat app with rooms named "DevRooms". Users can instantly join any room and chat with other members of the room. The room shows last 100 messages and who else is online. A chat bot is always there to help out with notifications like warm greetings and left alters. </p>
 
 <h3 align="center">Screenshots</h3>
 
